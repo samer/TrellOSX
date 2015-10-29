@@ -22,6 +22,25 @@
       font-family: helvetica;
     }
   </style>
+  <script>
+      if (!MacGap.Menu.getItem('Actions')) {
+          MacGap.Menu.addItem({ label: 'Actions', keys: '', index: 1});
+        
+          var menu = MacGap.Menu.getItem('Actions').submenu;
+          menu.addItem({
+                        label: "Reload",
+                        keys: 'cmd+r'
+                       }, function () {
+                        window.location.reload();
+                       });
+      } else {
+          // rebind the callbacks to the menu item if the page has changed
+          var menu = MacGap.Menu.getItem('Actions').submenu;
+          menu.getItem('Reload').callback = function() {
+              window.location.reload();
+          };
+      }
+</script>
   
 </head>
 <body>
